@@ -40,12 +40,6 @@ The system simulates event ingestion via a prebuilt `publisher` Docker image and
 
 ## 🚀 Quick Start
 
-### Prerequisites
-
-- Docker & Docker Compose
-- Node.js (for local development, optional)
-
-### Run the whole system
 
 ```bash
 docker-compose up --build
