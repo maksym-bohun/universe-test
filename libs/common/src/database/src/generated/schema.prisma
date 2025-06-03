@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Source {
+  facebook
+  tiktok
+}
+
+enum FunnelStage {
+  top
+  bottom
+}
+
+model Event {
+  id          String      @id @default(uuid())
+  eventId     String      @unique
+  timestamp   DateTime
+  source      Source
+  funnelStage FunnelStage
+  eventType   String
+  campaignId  String?
+  revenue     Float?
+  data        Json
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
