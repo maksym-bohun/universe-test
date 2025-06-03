@@ -43,8 +43,6 @@ export class NatsPublisherService
   }
 
   async beforeApplicationShutdown() {
-    // TODO: remove
-    console.log('SHUTDOWN');
     await this.shutdown();
   }
 

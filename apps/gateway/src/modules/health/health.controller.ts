@@ -4,8 +4,6 @@ import { Controller, Get } from '@nestjs/common';
 export class HealthController {
   @Get()
   public live() {
-    // TODO: remove
-    console.log('Health Controller');
     return { status: 'OK' };
   }
 }

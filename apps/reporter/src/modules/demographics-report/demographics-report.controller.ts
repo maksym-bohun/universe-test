@@ -8,8 +8,6 @@ export class DemographicsReportController {
 
   @Get()
   getReport(@Query() dto: GetDemographicsReportDto) {
-    // TODO: remove
-    console.log('DemographicsReportController');
     return this.service.getReport(dto);
   }
 }
