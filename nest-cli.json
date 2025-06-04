@@ -28,7 +28,7 @@
     "fb-collector": {
       "type": "application",
       "root": "apps/fb-collector",
-      "entryFile": "main",
+      "entryFile": "apps/fb-collector/main",
       "sourceRoot": "apps/fb-collector/src",
       "compilerOptions": {
         "tsConfigPath": "apps/fb-collector/tsconfig.app.json"
@@ -37,7 +37,7 @@
     "ttk-collector": {
       "type": "application",
       "root": "apps/ttk-collector",
-      "entryFile": "main",
+      "entryFile": "apps/ttk-collector/main",
       "sourceRoot": "apps/ttk-collector/src",
       "compilerOptions": {
         "tsConfigPath": "apps/ttk-collector/tsconfig.app.json"
@@ -46,12 +46,13 @@
     "reporter": {
       "type": "application",
       "root": "apps/reporter",
-      "entryFile": "main",
+      "entryFile": "apps/reporter/main",
       "sourceRoot": "apps/reporter/src",
       "compilerOptions": {
         "tsConfigPath": "apps/reporter/tsconfig.app.json"
       }
     }
+
   },
   "monorepo": true,
   "root": "apps/gateway"

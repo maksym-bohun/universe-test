@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EventsController = void 0;
 const common_1 = require("@nestjs/common");
@@ -56,8 +57,6 @@ __decorate([
 ], EventsController.prototype, "handleEvent", null);
 exports.EventsController = EventsController = __decorate([
     (0, common_1.Controller)('events'),
-    __metadata("design:paramtypes", [events_service_1.EventsService,
-        nestjs_pino_1.Logger,
-        metrics_service_1.MetricsService])
+    __metadata("design:paramtypes", [events_service_1.EventsService, typeof (_a = typeof nestjs_pino_1.Logger !== "undefined" && nestjs_pino_1.Logger) === "function" ? _a : Object, metrics_service_1.MetricsService])
 ], EventsController);
 //# sourceMappingURL=events.controller.js.map

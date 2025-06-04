@@ -40,7 +40,6 @@ let NatsPublisherService = class NatsPublisherService {
         await this.shutdown();
     }
     async beforeApplicationShutdown() {
-        console.log('SHUTDOWN');
         await this.shutdown();
     }
     async shutdown() {

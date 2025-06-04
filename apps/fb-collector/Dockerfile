@@ -5,6 +5,10 @@ RUN npm install
 COPY . .
 RUN npx prisma generate --schema=libs/common/src/database/prisma/schema.prisma
 RUN npm run build fb-collector
+COPY apps/fb-collector/start.sh .
+RUN chmod +x start.sh
+CMD ["./start.sh"]
+
 
 FROM node:alpine AS production
 
@@ -17,4 +21,6 @@ RUN npm install --production
 COPY --from=development /usr/src/app/dist ./dist
 RUN chown -R node:node /usr/src/app
 USER node
-CMD ["node", "dist/apps/fb-collector/main"]
+COPY apps/fb-collector/start.sh .
+RUN chmod +x start.sh
+CMD ["./start.sh"]

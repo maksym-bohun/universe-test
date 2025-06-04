@@ -13,7 +13,6 @@ exports.HealthController = void 0;
 const common_1 = require("@nestjs/common");
 let HealthController = class HealthController {
     live() {
-        console.log('Health Controller');
         return { status: 'OK' };
     }
 };

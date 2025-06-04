@@ -1,22 +1,27 @@
-FROM node:20-alpine AS base
+FROM node:alpine AS development
 WORKDIR /usr/src/app
-COPY package*.json ./
+COPY package.json package-lock.json ./
 RUN npm install
-
-FROM base AS development
-WORKDIR /usr/src/app
+RUN apk add --no-cache curl
 COPY . .
-RUN npm install --global @nestjs/cli
-CMD ["npm", "run", "start:dev"]
+RUN npx prisma generate --schema=libs/common/src/database/prisma/schema.prisma
+RUN npm run build gateway
+COPY apps/gateway/start.sh .
+RUN chmod +x start.sh
+CMD ["./start.sh"]
 
-FROM base AS build
-WORKDIR /usr/src/app
-COPY . .
-RUN npm run build
+FROM node:alpine AS production
 
-FROM node:20-alpine AS production
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
 WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install --omit=dev
-COPY --from=build /usr/src/app/dist ./dist
-CMD ["node", "dist/apps/gateway/main"]
+COPY package.json package-lock.json ./
+RUN npm install --production
+COPY --from=development /usr/src/app/dist ./dist
+RUN chown -R node:node /usr/src/app
+USER node
+COPY apps/gateway/start.sh .
+RUN chmod +x start.sh
+CMD ["./start.sh"]
+

@@ -28,7 +28,7 @@ services:
       - "4222:4222"
       - "8222:8222"
     healthcheck:
-      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8222/"]
+      test: ["CMD-SHELL", "nc -z localhost 4222 || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -73,18 +73,15 @@ services:
       context: .
       dockerfile: ./apps/gateway/Dockerfile
       target: development
-    command: npm run start:dev gateway
     env_file:
       - ./.env
     ports:
       - 3000:3000
-    volumes:
-      - .:/usr/src/app
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:3000/health" ]
       interval: 10s
       timeout: 5s
-      retries: 3
+      retries: 10
     depends_on:
       - nats
     networks:
@@ -95,13 +92,10 @@ services:
       context: .
       dockerfile: ./apps/fb-collector/Dockerfile
       target: development
-    command: npm run start:dev fb-collector
     env_file:
       - ./.env
     ports:
       - 3004:3000
-    volumes:
-      - .:/usr/src/app
     networks:
       - app-net
     depends_on:
@@ -113,13 +107,10 @@ services:
       context: .
       dockerfile: ./apps/ttk-collector/Dockerfile
       target: development
-    command: npm run start:dev ttk-collector
     env_file:
       - ./.env
     ports:
       - 3005:3000
-    volumes:
-      - .:/usr/src/app
     networks:
       - app-net
     depends_on:
@@ -131,7 +122,6 @@ services:
       context: .
       dockerfile: apps/reporter/Dockerfile
       target: ${DOCKER_TARGET:-development}
-    command: npm run start:dev reporter
     env_file:
       - .env
     volumes:
