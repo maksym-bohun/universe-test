@@ -18,6 +18,7 @@ ENV NODE_ENV=${NODE_ENV}
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install --production
+RUN npm run build fb-collector
 COPY --from=development /usr/src/app/dist ./dist
 RUN chown -R node:node /usr/src/app
 USER node

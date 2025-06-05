@@ -124,9 +124,6 @@ services:
       target: ${DOCKER_TARGET:-development}
     env_file:
       - .env
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
     depends_on:
       - nats
     networks:
